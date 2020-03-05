@@ -70,6 +70,16 @@ public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
+        public void setSubscriptions(final Array interests, final Callback errorCallback, final Callback successCallback) {
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    pusher.setSubscriptions(interests, errorCallback, successCallback);
+                }
+            });
+        }
+
+    @ReactMethod
     public void unsubscribe(final String interest, final Callback errorCallback, final Callback successCallback) {
         AsyncTask.execute(new Runnable() {
             @Override

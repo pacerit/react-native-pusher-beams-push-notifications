@@ -32,11 +32,11 @@ export default {
       RNPusherPushNotifications.subscribe(channel, onError, onSuccess);
     }
   },
-  setSubscriptions: (interests, onError) => {
+  setSubscriptions: (interests, onError, onSuccess) => {
     if (Platform.OS === 'ios') {
       RNPusherPushNotifications.setSubscriptions(interests, onError);
     } else {
-      console.log('Not implemented yet');
+      RNPusherPushNotifications.setSubscriptions(interests, onError, onSuccess);
     }
   },
   getSubscriptions: (onSuccess, onError) => {

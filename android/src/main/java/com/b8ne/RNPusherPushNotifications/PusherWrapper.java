@@ -4,6 +4,7 @@ import android.util.Log;
 
 import android.app.Activity;
 
+import java.lang.reflect.Array;
 import java.util.Set;
 
 import com.facebook.react.bridge.*;
@@ -123,6 +124,21 @@ public class PusherWrapper {
             errorCallback.invoke(0, ex.getMessage());
         }
     }
+
+    public void setSubscriptions(final Set<String> interests, final Callback errorCallback, final Callback successCallback) {
+             Log.d("PUSHER_WRAPPER", "Subscribing to " + interests);
+             System.out.print("Subscribing to " + interests);
+            try {
+                PushNotifications.setDeviceInterests(interests);
+                Log.d("PUSHER_WRAPPER", "Success! " + interests);
+                System.out.print("Success! " + interests);
+                successCallback.invoke();
+            } catch (Exception ex) {
+                 Log.d("PUSHER_WRAPPER", "Exception in PusherWrapper " + ex.getMessage());
+                 System.out.print("Exception in PusherWrapper.setSubscriptions " + ex.getMessage());
+                errorCallback.invoke(0, ex.getMessage());
+            }
+        }
 
     public void unsubscribe(final String interest, final Callback errorCallback, final Callback successCallback) {
         Log.d("PUSHER_WRAPPER", "Unsubscribing from " + interest);
