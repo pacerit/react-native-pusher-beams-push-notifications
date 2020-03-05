@@ -134,8 +134,8 @@ public class PusherWrapper {
                 System.out.print("Success! " + interests);
                 successCallback.invoke();
             } catch (Exception ex) {
-                 Log.d("PUSHER_WRAPPER", "Exception in PusherWrapper " + ex.getMessage());
-                 System.out.print("Exception in PusherWrapper.setSubscriptions " + ex.getMessage());
+                Log.d("PUSHER_WRAPPER", "Exception in PusherWrapper " + ex.getMessage());
+                System.out.print("Exception in PusherWrapper.setSubscriptions " + ex.getMessage());
                 errorCallback.invoke(0, ex.getMessage());
             }
         }

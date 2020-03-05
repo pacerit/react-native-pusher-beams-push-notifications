@@ -8,6 +8,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Callback;
 
+import java.util.Set;
+
 // SEE: https://docs.pusher.com/beams/reference/android
 
 public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule {
@@ -70,7 +72,7 @@ public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
-        public void setSubscriptions(final Array interests, final Callback errorCallback, final Callback successCallback) {
+        public void setSubscriptions(final Set<String> interests, final Callback errorCallback, final Callback successCallback) {
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
