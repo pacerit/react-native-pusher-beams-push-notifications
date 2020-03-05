@@ -41,9 +41,9 @@ export default {
   },
   getSubscriptions: (onSuccess, onError) => {
     if (Platform.OS === 'ios') {
-        console.log('Not implemented yet');
+      RNPusherPushNotifications.getSubscriptions(onError, onSuccess);
     } else {
-        RNPusherPushNotifications.getSubscriptions(onSuccess, onError);
+      RNPusherPushNotifications.getSubscriptions(onSuccess, onError);
     }
   },
   unsubscribe: (channel, onError, onSuccess) => {

@@ -49,6 +49,14 @@ RCT_EXPORT_METHOD(setSubscriptions:(NSArray *)interests callback:(RCTResponseSen
   });
 }
 
+RCT_EXPORT_METHOD(getSubscriptions: callbackFunction:(RCTResponseSenderBlock)callback) {
+  dispatch_async(dispatch_get_main_queue(), ^{
+      NSArray *sub;
+      sub = [[PushNotifications shared] getDeviceInterests];
+      callback(@[sub]);
+  });
+}
+
 RCT_EXPORT_METHOD(unsubscribe:(NSString *)interest callback:(RCTResponseSenderBlock)callback) {
   dispatch_async(dispatch_get_main_queue(), ^{
     NSError *anyError;

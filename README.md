@@ -1,25 +1,24 @@
-# react-native-pusher-push-notifications
+# react-native-pusher-beams-push-notifications
+
+*This package is forked from [b8ne/react-native-pusher-push-notifications](https://github.com/b8ne/react-native-pusher-push-notifications).
+The goal is to implement features that were not implemented in the original package.*
 
 Manage pusher interest subscriptions from within React Native JS
 
-**UPDATE: 22/09/2019**
-I appreciate all of the support on this project, however due to changes in work I haven't done much with RN in the last year.  Because I know this package helps a lot of people out, I'm looking for and happy to include some else willing to maintain this package, testing and approving PRs.  Shoot me an email.
-
-
 More information about Pusher Beams and their Swift library, `push-notifications-swift`, can be found on their [Github repo](https://github.com/pusher/push-notifications-swift).
 
-[![npm version](https://badge.fury.io/js/react-native-pusher-push-notifications.svg)](https://badge.fury.io/js/react-native-pusher-push-notifications)
-
+## Differences from original package
+* Implemented *getSubscriptions* method for *iOS*
 ## Requirements
 **This branch is only compatible with React Native >0.60.x**
 
 ## Getting started
 
-`$ npm install react-native-pusher-push-notifications --save`
+`$ npm install react-native-pusher-beams-push-notifications --save`
 
 or yarn
 
-`$ yarn add react-native-pusher-push-notifications`
+`$ yarn add react-native-pusher-beams-push-notifications`
 
 ## Automatic installation
 
@@ -27,7 +26,7 @@ React native link will install the pods required for this to work automatically.
 
 ### Install via yarn/npm
 ```
-yarn add react-native-pusher-push-notifications
+yarn add react-native-pusher-beams-push-notifications
 ```
 
 ### Additional, Manual Steps Required
