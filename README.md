@@ -7,6 +7,10 @@ Manage pusher interest subscriptions from within React Native JS
 
 More information about Pusher Beams and their Swift library, `push-notifications-swift`, can be found on their [Github repo](https://github.com/pusher/push-notifications-swift).
 
+[![npm version](https://badge.fury.io/js/react-native-pusher-beams-push-notifications.svg)](https://badge.fury.io/js/react-native-pusher-beams-push-notifications)
+![NPM](https://img.shields.io/npm/l/react-native-pusher-beams-push-notifications)
+![npm](https://img.shields.io/npm/dy/react-native-pusher-beams-push-notifications)
+
 ## Differences from original package
 * Implemented *getSubscriptions* method for *iOS*
 * Implemented *setSubscriptions* method for *Android*
