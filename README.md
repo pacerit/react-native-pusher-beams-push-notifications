@@ -163,139 +163,50 @@ $ cd ./android && ./gradlew clean && ./gradlew --stop; cd ..
 
 ## Implementation
 
-In typescript:
+Example implementation
 
-```typescript jsx
+```js
 import {Platform} from "react-native";
 import {PUSHER_BEAMS_INSTANCE_ID} from "react-native-dotenv";
-import RNPusherPushNotifications from "react-native-pusher-push-notifications";
+import RNPusherPushNotifications from "react-native-pusher-beams-push-notifications";
 
-const init= (): void => {
+// Get your interest
+const interests = [
+    "debug-test",
+    "updates",
+];
+
+const init = () => {
     RNPusherPushNotifications.setInstanceId(PUSHER_BEAMS_INSTANCE_ID);
 
+    // Init interests after registration
+    RNPusherPushNotifications.on('registered', () => {
+       subscribe(interests);
+    });
+
     RNPusherPushNotifications.on("notification", handleNotification);
-    RNPusherPushNotifications.setOnSubscriptionsChangedListener(onSubscriptionsChanged);
 };
 
-const subscribe = (interest: string): void => {
-    console.log(`Subscribing to "${interest}"`);
-    RNPusherPushNotifications.subscribe(
-        interest,
+const subscribe = interests => {
+    console.log(`Subscribing to "${interests}"`);
+    RNPusherPushNotifications.setSubscriptions(
+        interests,
         (statusCode, response) => {
             console.error(statusCode, response);
         },
         () => {
-            console.log(`CALLBACK: Subscribed to ${interest}`);
+            console.log(`CALLBACK: Subscribed to ${interests}`);
         }
     );
 };
 
-const handleNotification = (notification: any): void => {
+const handleNotification = notification => {
     console.log(notification);
     if (Platform.OS === "ios") {
         console.log("CALLBACK: handleNotification (ios)");
     } else {
         console.log("CALLBACK: handleNotification (android)");
-        console.log(notification);
     }
-};
-
-const onSubscriptionsChanged = (interests: string[]): void => {
-    console.log("CALLBACK: onSubscriptionsChanged");
-    console.log(interests);
-}
-```
-
-## Usage
-
-```ecmascript 6
-// Import module
-import RNPusherPushNotifications from 'react-native-pusher-push-notifications';
-
-// Get your interest
-const donutsInterest = 'debug-donuts';
-
-// Initialize notifications
-export const init = () => {
-  // Set your app key and register for push
-  RNPusherPushNotifications.setInstanceId(CONSTANTS.PUSHER_INSTANCE_ID);
-
-  // Init interests after registration
-  RNPusherPushNotifications.on('registered', () => {
-    subscribe(donutsInterest);
-  });
-
-  // Setup notification listeners
-  RNPusherPushNotifications.on('notification', handleNotification);
-};
-
-// Handle notifications received
-const handleNotification = notification => {
-  console.log(notification);
-
-  // iOS app specific handling
-  if (Platform.OS === 'ios') {
-    switch (notification.appState) {
-      case 'inactive':
-      // inactive: App came in foreground by clicking on notification.
-      //           Use notification.userInfo for redirecting to specific view controller
-      case 'background':
-      // background: App is in background and notification is received.
-      //             You can fetch required data here don't do anything with UI
-      case 'active':
-      // App is foreground and notification is received. Show a alert or something.
-      default:
-        break;
-    } else {
-        // console.log("android handled notification...");
-    }
-  }
-};
-
-// Subscribe to an interest
-const subscribe = interest => {
-  // Note that only Android devices will respond to success/error callbacks
-  RNPusherPushNotifications.subscribe(
-    interest,
-    (statusCode, response) => {
-      console.error(statusCode, response);
-    },
-    () => {
-      console.log('Success');
-    }
-  );
-};
-
-// Unsubscribe from an interest
-const unsubscribe = interest => {
-  RNPusherPushNotifications.unsubscribe(
-    interest,
-    (statusCode, response) => {
-      console.tron.logImportant(statusCode, response);
-    },
-    () => {
-      console.tron.logImportant('Success');
-    }
-  );
-};
-```
-
-## iOS only methods
-
-```ecmascript 6
-// Set interests
-const donutInterests = ['debug-donuts', 'debug-general'];
-const setSubscriptions = donutInterests => {
-  // Note that only Android devices will respond to success/error callbacks
-  RNPusherPushNotifications.setSubscriptions(
-    donutInterests,
-    (statusCode, response) => {
-      console.error(statusCode, response);
-    },
-    () => {
-      console.log('Success');
-    }
-  );
 };
 ```
 
