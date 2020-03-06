@@ -40,3 +40,7 @@ npm-debug.log
 yarn-error.log
 
 .DS_Store
+/package-lock.json
+/android/gradle/
+/android/gradlew
+/android/gradlew.bat

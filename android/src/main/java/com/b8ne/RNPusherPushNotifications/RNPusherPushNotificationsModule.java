@@ -2,11 +2,15 @@
 package com.b8ne.RNPusherPushNotifications;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Callback;
+
+import java.util.Set;
 
 // SEE: https://docs.pusher.com/beams/reference/android
 
@@ -54,7 +58,9 @@ public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                pusher.clearAllState();
+                if (checkPusherInstance()) {
+                    pusher.clearAllState();
+                }
             }
         });
     }
@@ -64,17 +70,31 @@ public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                pusher.subscribe(interest, errorCallback, successCallback);
+                if (checkPusherInstance()) {
+                    pusher.subscribe(interest, errorCallback, successCallback);
+                }
             }
         });
     }
+
+    @ReactMethod
+        public void setSubscriptions(final Set<String> interests, final Callback errorCallback, final Callback successCallback) {
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    pusher.setSubscriptions(interests, errorCallback, successCallback);
+                }
+            });
+        }
 
     @ReactMethod
     public void unsubscribe(final String interest, final Callback errorCallback, final Callback successCallback) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                pusher.unsubscribe(interest, errorCallback, successCallback);
+                if (checkPusherInstance()) {
+                    pusher.unsubscribe(interest, errorCallback, successCallback);
+                }
             }
         });
     }
@@ -84,7 +104,9 @@ public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                pusher.unsubscribeAll(errorCallback, successCallback);
+                if (checkPusherInstance()) {
+                    pusher.unsubscribeAll(errorCallback, successCallback);
+                }
             }
         });
     }
@@ -94,7 +116,9 @@ public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                pusher.getSubscriptions(subscriptionCallback, errorCallback);
+                if (checkPusherInstance()) {
+                    pusher.getSubscriptions(subscriptionCallback, errorCallback);
+                }
             }
         });
     }
@@ -104,7 +128,9 @@ public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                pusher.setUserId(userId, token, errorCallback, successCallback);
+                if (checkPusherInstance()) {
+                    pusher.setUserId(userId, token, errorCallback, successCallback);
+                }
             }
         });
     }
@@ -114,9 +140,20 @@ public class RNPusherPushNotificationsModule extends ReactContextBaseJavaModule 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                pusher.setOnSubscriptionsChangedListener(subscriptionChangedListener);
+                if (checkPusherInstance()) {
+                    pusher.setOnSubscriptionsChangedListener(subscriptionChangedListener);
+                }
             }
         });
     }
 
+    public boolean checkPusherInstance() {
+        if (pusher == null) {
+            Log.d("PUSHER_PUSH_MODULE", "Pusher instance not set. setAppKey() function must be called before");
+            System.out.print("Pusher instance not set. setAppKey() function must be called before");
+            return false;
+        }
+
+        return true;
+    }
 }
