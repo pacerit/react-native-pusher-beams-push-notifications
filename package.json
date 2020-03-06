@@ -1,20 +1,24 @@
 {
-  "name": "react-native-pusher-push-notifications",
-  "version": "2.4.0",
-  "description": "Manage pusher channel subscriptions from within React Native JS",
+  "name": "react-native-pusher-beams-push-notifications",
+  "version": "1.0.0",
+  "description": "Manage pusher beams push notifications from within React Native JS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/b8ne/react-native-pusher-push-notifications.git"
+    "url": "git+https://github.com/pacerit/react-native-pusher-beams-push-notifications"
   },
   "keywords": [
     "react-native",
     "pusher",
+    "puhser-beams",
+    "beams",
     "push",
-    "notifications"
+    "notifications",
+    "ios",
+    "android"
   ],
   "author": "b8ne",
   "license": "MIT",
@@ -22,7 +26,7 @@
     "react-native": "^0.60.0"
   },
   "bugs": {
-    "url": "https://github.com/b8ne/react-native-pusher-push-notifications/issues"
+    "url": "https://github.com/pacerit/react-native-pusher-beams-push-notificationsissues"
   },
-  "homepage": "https://github.com/b8ne/react-native-pusher-push-notifications#readme"
+  "homepage": "https://github.com/pacerit/react-native-pusher-beams-push-notifications"
 }
