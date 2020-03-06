@@ -10,6 +10,7 @@ More information about Pusher Beams and their Swift library, `push-notifications
 ## Differences from original package
 * Implemented *getSubscriptions* method for *iOS*
 * Implemented *setSubscriptions* method for *Android*
+* Updates deprecated functions in PusherWrapper for *Android*
 ## Requirements
 **This branch is only compatible with React Native >0.60.x**
 

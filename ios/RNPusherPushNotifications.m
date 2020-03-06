@@ -43,6 +43,7 @@ RCT_EXPORT_METHOD(clearAllState) {
 }
 
 RCT_EXPORT_METHOD(setSubscriptions:(NSArray *)interests callback:(RCTResponseSenderBlock)callback) {
+  RCTLogInfo(@"Subscribing to interests: %@", interests);
   dispatch_async(dispatch_get_main_queue(), ^{
     NSError *anyError;
     [[PushNotifications shared] setDeviceInterestsWithInterests:interests error:&anyError];

@@ -144,7 +144,7 @@ public class PusherWrapper {
         Log.d("PUSHER_WRAPPER", "Unsubscribing from " + interest);
         System.out.print("Unsubscribing from " + interest);
         try {
-            PushNotifications.unsubscribe(interest);
+            PushNotifications.removeDeviceInterest(interest);
             if (successCallback != null) {
                 successCallback.invoke();
             }
@@ -161,7 +161,7 @@ public class PusherWrapper {
     public void unsubscribeAll(final Callback errorCallback, final Callback successCallback) {
 
         try {
-            PushNotifications.unsubscribeAll();
+            PushNotifications.clearDeviceInterests();
             if (successCallback != null) {
                 successCallback.invoke();
             }
@@ -177,7 +177,7 @@ public class PusherWrapper {
 
     public void getSubscriptions(final Callback subscriptionCallback, final Callback errorCallback) {
         try {
-            Set<String> subscriptionSet = PushNotifications.getSubscriptions();
+            Set<String> subscriptionSet = PushNotifications.getDeviceInterests();
             WritableArray subscriptions = new WritableNativeArray();
             for (String subscription : subscriptionSet) {
                 subscriptions.pushString(subscription);
@@ -217,7 +217,7 @@ public class PusherWrapper {
 
     public void setOnSubscriptionsChangedListener(final Callback subscriptionChangedListener) {
 
-        PushNotifications.setOnSubscriptionsChangedListener(new SubscriptionsChangedListener() {
+        PushNotifications.setOnDeviceInterestsChangedListener(new SubscriptionsChangedListener() {
             @Override
             public void onSubscriptionsChanged(Set<String> interestSet) {
                 // call
